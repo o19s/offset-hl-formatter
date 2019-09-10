@@ -18,6 +18,8 @@ public class OffsetTests extends SolrTestCaseJ4 {
         HashMap<String, String> args = new HashMap<>();
         args.put("defType", "edismax");
         args.put("hl", "true");
+        args.put("hl.simple.pre", "<em score=\"$score\" offset=\"$offset\">");
+        args.put("hl.simple.post", "</em>");
         args.put("hl.fl", "content");
         args.put("qf", "content");
         args.put("q.alt", "*:*");
@@ -31,7 +33,7 @@ public class OffsetTests extends SolrTestCaseJ4 {
         assertQ("Offset test",
                 sumLRF.makeRequest("night"),
                 "//lst[@name='highlighting']/lst[@name='1']",
-                "//lst[@name='1']/arr[@name='content']/str"
+                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'offset=\"13\"')]"
         );
     }
 }
