@@ -10,7 +10,7 @@ public class OffsetFormatter extends HighlightingPluginBase implements SolrForma
     @Override
     public Formatter getFormatter(String fieldName, SolrParams params) {
         return new SimpleOffsetFormatter(
-                params.getFieldParam(fieldName, HighlightParams.SIMPLE_PRE, "<em>"),
+                params.getFieldParam(fieldName, HighlightParams.SIMPLE_PRE, "<em score=\"$score\" offset=\"$offset\">"),
                 params.getFieldParam(fieldName, HighlightParams.SIMPLE_POST, "</em>")
         );
     }

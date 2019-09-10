@@ -18,15 +18,13 @@ public class OffsetTests extends SolrTestCaseJ4 {
         HashMap<String, String> args = new HashMap<>();
         args.put("defType", "edismax");
         args.put("hl", "true");
-        args.put("hl.simple.pre", "<em score=\"$score\" offset=\"$offset\">");
-        args.put("hl.simple.post", "</em>");
         args.put("hl.fl", "content");
         args.put("qf", "content");
         args.put("q.alt", "*:*");
         TestHarness.LocalRequestFactory sumLRF = h.getRequestFactory(
                 "standard", 0, 200, args);
 
-        assertU(adoc("content", "A long day's night",
+        assertU(adoc("content", "A long day's night.",
                 "id", "1"));
         assertU(commit());
         assertU(optimize());
