@@ -1,0 +1,37 @@
+package com.o19s.labs;
+
+import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.util.TestHarness;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.HashMap;
+
+public class OffsetTests extends SolrTestCaseJ4 {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        initCore("solrconfig.xml","schema.xml");
+    }
+
+    @Test
+    public void testOffsets() {
+        HashMap<String, String> args = new HashMap<>();
+        args.put("defType", "edismax");
+        args.put("hl", "true");
+        args.put("hl.fl", "content");
+        args.put("qf", "content");
+        args.put("q.alt", "*:*");
+        TestHarness.LocalRequestFactory sumLRF = h.getRequestFactory(
+                "standard", 0, 200, args);
+
+        assertU(adoc("content", "A long day's night",
+                "id", "1"));
+        assertU(commit());
+        assertU(optimize());
+        assertQ("Offset test",
+                sumLRF.makeRequest("night"),
+                "//lst[@name='highlighting']/lst[@name='1']",
+                "//lst[@name='1']/arr[@name='content']/str"
+        );
+    }
+}
