@@ -29,8 +29,16 @@ public class SimpleOffsetFormatter implements Formatter {
         // beginning, to avoid char[] allocations in the middle of appends.
         StringBuilder returnBuffer = new StringBuilder(preTag.length() + matchedText.length() + postTag.length());
 
-        String replacedPre = preTag.replace("$offset", Integer.toString(tokenGroup.getStartOffset()))
-                .replace("$score", Float.toString(tokenGroup.getTotalScore()));
+        String replacedPre = preTag
+                // Total score for the group
+                .replace("$score", Float.toString(tokenGroup.getTotalScore()))
+
+                // Offsets
+                .replace("$endOffset", Integer.toString(tokenGroup.getEndOffset()))
+                .replace("$startOffset", Integer.toString(tokenGroup.getStartOffset()))
+
+                // Number of tokens in the group
+                .replace("$numTokens", Integer.toString(tokenGroup.getNumTokens()));
 
         returnBuffer.append(replacedPre);
         returnBuffer.append(matchedText);

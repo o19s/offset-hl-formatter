@@ -6,7 +6,7 @@
 
   <groupId>com.o19s.labs</groupId>
   <artifactId>offset-hl-formatter</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1-solr7.1.0-SNAPSHOT</version>
 
   <name>offset-hl-formatter</name>
   <url>https://github.com/o19s/hl-offset-formatter</url>

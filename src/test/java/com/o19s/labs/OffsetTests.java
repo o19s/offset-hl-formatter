@@ -31,7 +31,10 @@ public class OffsetTests extends SolrTestCaseJ4 {
         assertQ("Offset test",
                 sumLRF.makeRequest("night"),
                 "//lst[@name='highlighting']/lst[@name='1']",
-                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'offset=\"13\"')]"
+                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'data-num-tokens=\"1\"')]",
+                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'data-score=\"1.0\"')]",
+                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'data-start-offset=\"13\"')]",
+                "//lst[@name='1']/arr[@name='content']/str[contains(text(),'data-end-offset=\"18\"')]"
         );
     }
 }
