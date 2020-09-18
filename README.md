@@ -1,5 +1,11 @@
 # offset highlighter concept
 
+---------
+
+**Deprecated** With the arrival of "Packages" in Solr 8, we've moved this code over to the https://github.com/o19s/payload-component/ project.
+
+---------
+
 This code demonstrates adding offsets to a highlighter formatter. You can see it in action as part of this demonstration project: https://github.com/o19s/pdf-discovery-demo/.
 
 This plugin provides an `OffsetFormatter` which supports pre tags with `$score`, `$numTokens`, `$endOffset`, `$startOffset` placeholders.  If these placeholders are included in the tag they will be replaced with the tokengroup score and offset for the matching text.
